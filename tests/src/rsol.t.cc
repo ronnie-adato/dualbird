@@ -1,45 +1,17 @@
-#include <gtest/gtest.h>
+#include <include/rsol.hpp>
 #include <include/node.hpp>
+#include <include/list_utils.hpp>
+#include <gtest/gtest.h>
 
-// Helper function to create a linked list
-Node* CreateLinkedList(const std::vector<int>& values, const std::vector<int>& afriend_indices) {
-    if (values.empty()) {
-        return nullptr;
-    }
-
-    std::vector<Node*> nodes(values.size(), nullptr);
-    for (size_t i = 0; i < values.size(); ++i) {
-        nodes[i] = new Node{values[i], nullptr, nullptr};
-        if (i > 0) {
-            nodes[i - 1]->next = nodes[i];
-        }
-    }
-
-    for (size_t i = 0; i < afriend_indices.size(); ++i) {
-        if (afriend_indices[i] >= 0 && afriend_indices[i] < static_cast<int>(nodes.size())) {
-            nodes[i]->afriend = nodes[afriend_indices[i]];
-        }
-    }
-
-    return nodes[0];
-}
-
-// Helper function to delete a linked list
-void DeleteLinkedList(Node* root) {
-    while (root) {
-        Node* temp = root;
-        root = root->next;
-        delete temp;
-    }
-}
 
 // Test case for the Clone function
-TEST(CloneTest, DeepCopy) {
+TEST(RCloneTest, DeepCopy) {
     // Create a linked list: 1 -> 2 -> 3, with afriend pointers: 1->3, 2->1, 3->2
     Node* root = CreateLinkedList({1, 2, 3}, {2, 0, 1});
 
     // Clone the linked list
-    Node* cloned_root = Clone(root);
+    std::unique_ptr<Solution> solution = std::make_unique<RSol>();
+    Node* cloned_root = solution->Clone(root);
 
 
     // Verify the cloned list is a deep copy

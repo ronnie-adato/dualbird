@@ -1,13 +1,13 @@
 #pragma once
 
-#include <string>
-
+#include <iostream>
 struct Node {
   int value;
   Node *next = nullptr;
   Node *afriend = nullptr;
 };
 
-Node *Clone(Node *root);
+std::ostream &operator<<(std::ostream &os, const Node &node);
+std::ostream &operator<<(std::ostream &os, const Node *node);
 
 // Node constructor

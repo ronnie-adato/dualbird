@@ -16,12 +16,14 @@ Implement a clone function for such a list.
 
 If you don't have `meson` download and install `meson` and `ninja`
 
-For first setup, comment out `line 7` in the main `./meson.build file` (`subdir('tests')`) and  run: `meson setup build`
+Run: `meson setup build`
 
 For compilation run: `ninja -C build`
 
 ## Running Tests
 
-After the first compilation, make sure that `line 7` in the main `./meson.build file` (`subdir('tests')`) is uncommented.
-
 Run: `./build/tests/tests-dual-bird`
+
+## Inspecting logs
+
+Open the file `/tmp/tests-dual-bird.INFO`

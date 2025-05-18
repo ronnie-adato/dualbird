@@ -1,38 +1,27 @@
-# Dependencies
-nglog = dependency('ng-log')
-
-deps = [
-  nglog,
-]
-
-# add definitions
-add_project_arguments('-DNG_LOG_USE_STDOUT', language: 'cpp')
-add_project_arguments('-DNGLOG_USE_EXPORT', language: 'cpp')
-add_project_arguments('-DNGLOG_EXPORT', language: 'cpp')
-add_project_arguments('-DNGLOG_NO_EXPORT', language: 'cpp')
-
-# Source files
-src_files = [
-  'node.cpp',
-]
-
+# Include directories
 inc_dir = include_directories('.', '..')
 
-args = ['-DNGLOG_EXPORT', '-DNGLOG_NO_EXPORT']
+# Source files for the library
+lib_src_files = [
+  'node.cpp',
+  'rsol.cpp',
+  'msol.cpp',
+]
 
-# Main executable
-executable('dual-bird',
-  sources: ['main.cpp'] + src_files,
+# Declare the library
+dual_bird_lib = library(
+  'dual-bird',
+  sources: lib_src_files,
   include_directories: inc_dir,
   dependencies: deps,
-    cpp_args : args,
+  cpp_args: cppargs,
   install: true
 )
 
-static_library('dual-bird',
-  sources: src_files,
+# Declare a dependency for the library to be used by tests
+dual_bird_dep = declare_dependency(
+  link_with: dual_bird_lib,
   include_directories: inc_dir,
   dependencies: deps,
-    cpp_args : args,
-  install: true
+  compile_args: cppargs
 )

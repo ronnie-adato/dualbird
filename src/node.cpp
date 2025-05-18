@@ -7,7 +7,7 @@ std::ostream &operator<<(std::ostream &os, const Node &node) {
   } else {
     os << ", afriend: nullptr";
   }
-  os << ']' << std::endl << node.next;
+  os << "] --> " << node.next;
   return os;
 }
 

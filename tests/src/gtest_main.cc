@@ -28,11 +28,12 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <cstdio>
-#include <iostream>
 #include <gtest/gtest.h>
-// #include <ng-log/logging.h>
+#include <iomanip>
+#include <iostream>
+#include <ng-log/logging.h>
 
-#if defined(GTEST_OS_ESP8266) || defined(GTEST_OS_ESP32) || \
+#if defined(GTEST_OS_ESP8266) || defined(GTEST_OS_ESP32) ||                    \
     (defined(GTEST_OS_NRF52) && defined(ARDUINO))
 // Arduino-like platforms: program entry points are setup/loop instead of main.
 
@@ -59,39 +60,30 @@ GTEST_API_ int main() {
 #else
 // Normal platforms: program entry point is main, argc/argv are initialized.
 
-/* This function writes a prefix that matches glog's default format.
- * (The third parameter can be used to receive user-supplied data, and is
- * nullptr by default.)
- */
-// void CustomPrefix(std::ostream &s, const google::LogMessageInfo &l, void*) {
-//    s 
-//    << '[' << l.severity[0] << "] "
-//    << std::setw(4) << 1900 + l.time.year()
-//    << '-'
-//    << std::setw(2) << 1 + l.time.month()
-//    << '-'
-//    << std::setw(2) << l.time.day()
-//    << ' '
-//    << std::setw(2) << l.time.hour() << ':'
-//    << std::setw(2) << l.time.min()  << ':'
-//    << std::setw(2) << l.time.sec() << "."
-//    << std::setw(6) << l.time.usec()
-//    << ' '
-//    << std::setfill(' ') << std::setw(5)
-//    << l.thread_id << std::setfill('0')
-//    << ' '
-//    << l.filename << ':' << l.line_number
-//    << ' '
-//    << ::testing::UnitTest::GetInstance()->current_test_info()->name()
-//    << "]";
-// }
+// This function writes a prefix that matches glog's default format.
+void MyPrefixFormatter(std::ostream &s, const nglog::LogMessage &m,
+                       void * /*data*/) {
+  s << '[' << nglog::GetLogSeverityName(m.severity())[0] << ' ' << std::setw(4)
+    << 1900 + m.time().year() << '-' << std::setw(2) << 1 + m.time().month() << '-'
+    << std::setw(2) << m.time().day() << ' ' << std::setw(2) << m.time().hour()
+    << ':' << std::setw(2) << m.time().min() << ':' << std::setw(2)
+    << m.time().sec() << "." << std::setw(6) << m.time().usec() << ' '
+    << std::setfill(' ') << std::setw(5) << m.thread_id() << std::setfill('0')
+    << ' ' << m.basename() << ':' << m.line() << ']';
+}
 
 GTEST_API_ int main(int argc, char **argv) {
-  std::cout 
-    << "Running main() from " << __FILE__ << std::endl;
-  // FLAGS_minloglevel = google::INFO;
-  // google::InitGoogleLogging(argv[0], CustomPrefix);
+  // Initialize Google Test
   testing::InitGoogleTest(&argc, argv);
+
+  // Set the minimum log level
+  FLAGS_minloglevel = nglog::INFO;
+
+  // Initialize ng-log with a custom prefix
+  nglog::InstallPrefixFormatter(&MyPrefixFormatter);
+  nglog::InitializeLogging(argv[0]);
+
+  // Run all tests
   return RUN_ALL_TESTS();
 }
 #endif

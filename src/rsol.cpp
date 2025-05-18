@@ -1,15 +1,14 @@
 #include <include/rsol.hpp>
 #include <include/node.hpp>
-#include <iostream>
-#include <ostream>
+#include <ng-log/logging.h>
 
 Node *RSol::Clone(Node *root) {
   if (root == nullptr) {
-    std::cerr << "Error: root is nullptr" << std::endl;
+    LOG(ERROR) << "Error: root is nullptr";
     return nullptr;
   }
 
-  std::cout << "Original list:" << std::endl << root << std::endl << std::endl;
+  LOG(INFO) << "Original list: " << root;
 
   Node *cloned_root = nullptr;
   Node *cloned_node = cloned_root;
@@ -25,7 +24,7 @@ Node *RSol::Clone(Node *root) {
     cloned_node->next = node->next;
     node->next = cloned_node;
   }
-  std::cout << "phase 1, Original list:" << std::endl << root << std::endl << std::endl;
+  LOG(INFO) << "phase 1, Original list: " << root;
 
   for (node = root, cloned_node = cloned_root; node != nullptr;
        node = cloned_node->next,
@@ -35,7 +34,7 @@ Node *RSol::Clone(Node *root) {
       cloned_node->afriend = node->afriend->next;
     }
   }
-  std::cout << "phase 2, Original list:" << std::endl << root << std::endl << std::endl;
+  LOG(INFO) << "phase 2, Original list: " << root;
 
   for (node = root, cloned_node = cloned_root; node != nullptr;
        node = node->next, cloned_node = cloned_node->next) {
@@ -44,8 +43,8 @@ Node *RSol::Clone(Node *root) {
     cloned_node->next = node->next == nullptr ? nullptr : node->next->next;
   }
 
-  std::cout << "phase 3, Original list:" << std::endl << root << std::endl << std::endl;
-  std::cout << "phase 3, Cloned list:" << std::endl << cloned_root << std::endl << std::endl;
+  LOG(INFO) << "phase 3, Original list: " << root;
+  LOG(INFO) << "phase 3, Cloned list: " << cloned_root;
 
   return cloned_root;
 }

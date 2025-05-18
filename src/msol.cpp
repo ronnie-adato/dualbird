@@ -1,12 +1,13 @@
 #include <include/msol.hpp>
 #include <include/node.hpp>
-#include <iostream>
+#include <ng-log/logging.h>
 
 Node *MSol::Clone(Node *root) {
   if (root == nullptr) {
+    LOG(ERROR) << "Error: root is nullptr";
     return nullptr;
   }
-  std::cout << "Begin:" << std::endl << root << std::endl << std::endl;
+  LOG(INFO) << "Begin: " << root;
 
   Node *cr = nullptr;
   for (Node *r = root; r != nullptr; r->next = cr, r = cr->next) {
@@ -14,12 +15,12 @@ Node *MSol::Clone(Node *root) {
     cr->value = r->value + 10;
     cr->next = r->next;
   }
-  std::cout << "Phase 1:" << std::endl << root << std::endl << std::endl;
+  LOG(INFO) << "Phase 1: " << root;
 
   for (Node *r = root; r != nullptr; r = r->next->next) {
     r->next->afriend = r->afriend->next;
   }
-  std::cout << "Phase 2:" << std::endl << root << std::endl << std::endl;
+  LOG(INFO) << "Phase 2: " << root;
 
   Node *croot = root->next;
   Node *ctmp = croot;
@@ -32,7 +33,7 @@ Node *MSol::Clone(Node *root) {
     ctmp = ctmp->next;
   }
 
-  std::cout << "root:" << std::endl << root << std::endl << std::endl;
-  std::cout << "croot:" << std::endl << croot << std::endl << std::endl;
+  LOG(INFO) << "root: " << root;
+  LOG(INFO) << "croot: " << croot;
   return croot;
 }

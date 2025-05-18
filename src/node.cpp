@@ -1,6 +1,4 @@
 #include <include/node.hpp>
-#include <iostream>
-#include <ostream>
 
 std::ostream &operator<<(std::ostream &os, const Node &node) {
   os << "[Value: " << node.value;

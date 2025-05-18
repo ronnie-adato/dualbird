@@ -1,6 +1,7 @@
 #pragma once
 
-#include <iostream>
+#include <ostream>
+
 struct Node {
   int value;
   Node *next = nullptr;

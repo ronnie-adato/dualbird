@@ -3,7 +3,7 @@
 
 #include "ng-log/logging.h"
 
-Node *MSol::Clone(Node *root) {
+auto MSol::Clone(Node *root) -> Node * {
   if (root == nullptr) {
     LOG(ERROR) << "Error: root is nullptr";
     return nullptr;
@@ -24,14 +24,12 @@ Node *MSol::Clone(Node *root) {
   LOG(INFO) << "Phase 2: " << root;
 
   Node *croot = root->next;
-  Node *ctmp = croot;
 
-  for (Node *r = root; r != nullptr; r = r->next) {
+  for (Node *r = root, *ctmp = croot; r != nullptr; r = r->next, ctmp = ctmp->next) {
     r->next = ctmp->next;
     if (ctmp->next != nullptr) {
       ctmp->next = ctmp->next->next;
     }
-    ctmp = ctmp->next;
   }
 
   LOG(INFO) << "root: " << root;

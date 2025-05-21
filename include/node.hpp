@@ -8,7 +8,7 @@ struct Node {
   Node *afriend = nullptr;
 };
 
-std::ostream &operator<<(std::ostream &os, const Node &node);
-std::ostream &operator<<(std::ostream &os, const Node *node);
+auto operator<<(std::ostream &os, const Node &node) -> std::ostream &;
+auto operator<<(std::ostream &os, const Node *node) -> std::ostream &;
 
 // Node constructor

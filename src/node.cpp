@@ -1,6 +1,8 @@
-#include <include/node.hpp>
+#include "node.hpp"
 
-std::ostream &operator<<(std::ostream &os, const Node &node) {
+#include <ostream>
+
+auto operator<<(std::ostream &os, const Node &node) -> std::ostream & {
   os << "[Value: " << node.value;
   if (node.afriend) {
     os << ", afriend: " << node.afriend->value;
@@ -11,7 +13,7 @@ std::ostream &operator<<(std::ostream &os, const Node &node) {
   return os;
 }
 
-std::ostream &operator<<(std::ostream &os, const Node *node) {
+auto operator<<(std::ostream &os, const Node *node) -> std::ostream &{
   if (node) {
     os << *node;
   } else {

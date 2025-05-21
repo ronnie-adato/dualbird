@@ -1,8 +1,9 @@
 #pragma once
+#include <vector>
 
 struct Node;
 
-#include <vector>
+auto CreateLinkedList(const std::vector<int> &values,
+                      const std::vector<int> &afriend_indices) -> Node *;
 
-Node* CreateLinkedList(const std::vector<int>& values, const std::vector<int>& afriend_indices);
-void DeleteLinkedList(Node* root);
+void DeleteLinkedList(Node *root);

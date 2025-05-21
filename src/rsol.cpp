@@ -1,6 +1,7 @@
-#include <include/rsol.hpp>
-#include <include/node.hpp>
-#include <ng-log/logging.h>
+#include "rsol.hpp"
+#include "node.hpp"
+
+#include "ng-log/logging.h"
 
 Node *RSol::Clone(Node *root) {
   if (root == nullptr) {

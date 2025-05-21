@@ -1,6 +1,6 @@
 #pragma once
 
-#include <include/solution.hpp>
+#include "solution.hpp"
 
 class RSol : public Solution {
 public:

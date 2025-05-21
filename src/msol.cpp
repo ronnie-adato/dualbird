@@ -1,6 +1,7 @@
-#include <include/msol.hpp>
-#include <include/node.hpp>
-#include <ng-log/logging.h>
+#include "msol.hpp"
+#include "node.hpp"
+
+#include "ng-log/logging.h"
 
 Node *MSol::Clone(Node *root) {
   if (root == nullptr) {

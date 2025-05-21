@@ -1,6 +1,8 @@
-#include <include/rsol.hpp>
-#include <include/node.hpp>
-#include <include/list_utils.hpp>
+#include "list_utils.hpp"
+
+#include "rsol.hpp"
+#include "node.hpp"
+
 #include <gtest/gtest.h>
 
 

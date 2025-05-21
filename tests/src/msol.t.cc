@@ -1,6 +1,8 @@
-#include <include/msol.hpp>
-#include <include/list_utils.hpp>
-#include <include/node.hpp>
+#include "list_utils.hpp"
+
+#include "msol.hpp"
+#include "node.hpp"
+
 #include <gtest/gtest.h>
 #include <memory>
 

@@ -31,7 +31,7 @@
 #include <gtest/gtest.h>
 #include <iomanip>
 #include <iostream>
-#include <ng-log/logging.h>
+#include "ng-log/logging.h"
 
 #if defined(GTEST_OS_ESP8266) || defined(GTEST_OS_ESP32) ||                    \
     (defined(GTEST_OS_NRF52) && defined(ARDUINO))

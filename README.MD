@@ -1,12 +1,15 @@
 # Problem Description
 
 A linked list with friends is defined by the following node structure:
-```
-Struct Node {
+
+```c++
+
+struct Node {
   int value;
   Node *next = nullptr;
   Node *afriend = nullptr;
 };
+
 ```
 
 `afriend` may point to any other node in the list or be null. Friendship doesn’t have to be mutual (i.e. a node pointed to by a friend pointer of another node, doesn’t have to point back).
@@ -14,15 +17,25 @@ Implement a clone function for such a list.
 
 ## Compile
 
-If you don't have `meson` download and install `meson` and `ninja`
+If you don't have `bazel` download and install it
 
-Run: `meson setup build`
+### Linting
 
-For compilation run: `ninja -C build`
+Run: bazel run @hedron_compile_commands//:refresh_all
+
+### Compilations
+
+#### library
+
+Run: `bazel build --config=clang-tidy //:dual-bird`
+
+#### tests
+
+Run: `bazel build --config=clang-tidy //tests:tests-dual-bird`
 
 ## Running Tests
 
-Run: `./build/tests/tests-dual-bird`
+Run: `./bazel-bin/tests/tests-dual-bird`
 
 ## Inspecting logs
 

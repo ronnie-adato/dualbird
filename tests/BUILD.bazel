@@ -1,0 +1,32 @@
+package(default_visibility = ["//visibility:public"])
+
+licenses(["notice"])
+
+exports_files(["COPYING"])
+
+cc_library(
+    name = "test_headers",
+    hdrs = glob(["include/*.hpp"]),
+    strip_include_prefix = "include",
+    visibility = ["//visibility:public"],
+)
+
+
+cc_test(
+    name = "tests-dual-bird",
+    includes = [
+        "../include",
+        ],
+    srcs = [
+        "src/gtest_main.cc",
+        "src/list_utils.cc",
+        "src/rsol.t.cc",
+        "src/msol.t.cc",
+    ],
+    deps = [
+        "//:dual-bird",
+        "@googletest//:gtest_main",
+        "@ng-log//:ng-log",
+        ":test_headers",
+    ],
+)

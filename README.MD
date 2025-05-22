@@ -17,7 +17,7 @@ Implement a clone function for such a list.
 
 ## Compile
 
-If you don't have `bazel` download and install it
+If you don't have `bazel` download and install it  [Bazel Introduction](https://bazel.build/about/intro)
 
 ### Linting
 
